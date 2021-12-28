@@ -1,25 +1,33 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+// Fill web form
+Cypress.Commands.add('fillForm', () => { 
+
+    cy.get('input#orderform-firstname').type('John')
+    cy.get('input#orderform-lastname').type('Doe')
+    cy.get('input#orderform-email').type('doe@bornfight.dev')
+    cy.get('input#orderform-country').type('Croatia')
+    cy.get('input#orderform-city').type('Zagreb')
+    cy.get('input#orderform-shippingaddress').type('Radnička 123')
+    cy.contains('Place order').click()
+    
+   
+ })
+
+ // Select Publisher and Game
+Cypress.Commands.add('selectGame', (publisher, game) => { 
+
+    cy.get('select#orderform-publisher').select(publisher)
+    cy.get('select#orderform-game').select(game)
+    cy.contains('Add to cart').click()
+    
+ })
+
+  // Wait, then go to page
+Cypress.Commands.add('waitAndGo', (page) => { 
+
+    cy.wait(200)
+    cy.visit('/')
+    cy.contains(page).click()
+
+    
+ })
+
