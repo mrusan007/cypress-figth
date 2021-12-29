@@ -22,6 +22,11 @@ Cypress.Commands.add('selectGame', (publisher, game) => {
  })
 
   // Wait, then go to page
+ /*
+    For some reason cypress doesn't click Order
+    Form and Checkout, so I used this little dirty
+    trick.
+*/
 Cypress.Commands.add('waitAndGo', (page) => { 
 
     cy.wait(200)
